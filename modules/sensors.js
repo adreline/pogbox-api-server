@@ -1,4 +1,4 @@
-import {queryDataBase as query} from "./utils.js"
+import {queryDatabase as query} from "./utils.js"
 
 export const queries = {
   dht1_single: "SELECT id,temperature,humidity,time_stamp FROM DHT ORDER BY id DESC LIMIT 1;",
