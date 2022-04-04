@@ -56,3 +56,11 @@ export function validateTimeTable(h,m){
   }
   return false;
 }
+
+export function lastArrayItem(array){
+  if (array.length!='undefined') {
+    return array[array.length - 1]
+  }else {
+    return "undefined"
+  }
+}
