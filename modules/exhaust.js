@@ -1,4 +1,3 @@
-import child_process from "child_process"
 import {shell_exec} from "./utils.js"
 
 const ops = {
