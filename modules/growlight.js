@@ -34,11 +34,11 @@ export function setSchedule({h_on,m_on,h_off,m_off}, callback){
     //install new crontab for www-data user
     shell_exec(`(crontab -l 2>/dev/null; echo \"${schedule_on}\") | crontab -`,()=>{
       shell_exec(`(crontab -l 2>/dev/null; echo \"${schedule_off}\") | crontab -`,()=>{
-        callback('ok')
+        callback("ok")
       })
     })
   })
   }else {
-    throw new Error("Bad data")
+    callback("Bad data")
   }
 }
