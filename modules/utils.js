@@ -4,9 +4,9 @@ import child_process from "child_process"
 function getDatabase(){
   return mysql.createConnection({
     host: "localhost",
-    database: "growbox_db",
-    user: "growbox_user",
-    password: "dfc0af598b4"
+    database: "db",
+    user: "user",
+    password: ""
   })
 }
 
@@ -15,13 +15,13 @@ export function queryDatabase(query,callback){
   con.connect((err)=>{
     if (err){
       console.log('DB Error')
-      callback("")
+      callback("0")
     }else {
         console.log("Connected!")
         con.query(query, (err, result)=>{
           if (err) {
             console.log('DB Error')
-            callback("")
+            callback("0")
           }else {
             console.log("Results fetched ")
             con.end()
