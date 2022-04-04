@@ -1,13 +1,6 @@
 import mysql from "mysql"
 import child_process from "child_process"
 
-export const queries = {
-  dht1_single: "SELECT id,temperature,humidity,time_stamp FROM DHT ORDER BY id DESC LIMIT 1;",
-  dht2_single: "SELECT id,temperature,humidity,time_stamp FROM DHT2 ORDER BY id DESC LIMIT 1;",
-  dst_single: "SELECT id,temperature,time_stamp FROM DST ORDER BY id DESC LIMIT 1;"
-}
-
-
 function getDatabase(){
   return mysql.createConnection({
     host: "localhost",
@@ -20,15 +13,25 @@ function getDatabase(){
 export function queryDatabase(query,callback){
   let con = getDatabase()
   con.connect((err)=>{
-    if (err){ throw err}
-    console.log("Connected!")
-      con.query(query, (err, result)=>{
-        if (err) throw err
-        console.log("Result: " + result)
-        con.end()
-        callback(result)
-    })
+    if (err){
+      console.log('DB Error')
+      callback("")
+    }else {
+        console.log("Connected!")
+        con.query(query, (err, result)=>{
+          if (err) {
+            console.log('DB Error')
+            callback("")
+          }else {
+            console.log("Results fetched ")
+            con.end()
+            callback(result)
+          }
+      })
+    }
+
   })
+
 }
 
 export function shell_exec(command, callback=function(){}){
